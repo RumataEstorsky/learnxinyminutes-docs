@@ -55,29 +55,29 @@ var y = 10
 y = 20     // y теперь 20
 
 /*
-  Scala is a statically typed language, yet note that in the above declarations,
-  we did not specify a type. This is due to a language feature called type
-  inference. In most cases, Scala compiler can guess what the type of a variable
-  is, so you don't have to type it every time. We can explicitly declare the
-  type of a variable like so:
+  Scala - статически-типизированный язык, и еще одно замечание по поводу объявлений,
+  вы можете не обьявлять тип. Это возможно благодаря специальной возможности языка,
+  называемой выводом типов (type inference). В большинстве случаев компилятор Scala
+  может сам определить требуемый тип данных. И так, вы можете опускать тип данных.
+  Но всегда остаётся возможность указать тип явно:
 */
 val z: Int = 10
 val a: Double = 1.0
 
-// Notice automatic conversion from Int to Double, result is 10.0, not 10
+// Обратите внимание, здесь просиходит автоматическое приведение из Int к Double, в результате будет 10.0, а не 10
 val b: Double = 10
 
-// Boolean values
+// Булевы значения
 true
 false
 
-// Boolean operations
+// Булевы операторы
 !true         // false
 !false        // true
 true == false // false
 10 > 5        // true
 
-// Math is as per usual
+// Ну, по обыкновению, арифметика
 1 + 1   // 2
 2 - 1   // 1
 5 * 3   // 15
@@ -86,56 +86,57 @@ true == false // false
 6.0 / 4 // 1.5
 
 
-// Evaluating an expression in the REPL gives you the type and value of the result
+// После вычислений REPL вернёт вам тип и значение результата
 
 1 + 7
 
-/* The above line results in:
+/* Строка выше вернёт следующий результат:
 
   scala> 1 + 7
   res29: Int = 8
 
-  This means the result of evaluating 1 + 7 is an object of type Int with a
-  value of 8
+  Это означает, что результатом вычислений 1 + 7 будет объект типа Int
+  со значением 8
 
-  Note that "res29" is a sequentially generated variable name to store the
-  results of the expressions you typed, your output may differ.
+  Заметьте, что имя переменной "res29" последовательно генерируется для сохранения результатов выражения,
+  которые вы ввели, в вашем случае оно будет отличаться.
 */
 
-"Scala strings are surrounded by double quotes"
-'a' // A Scala Char
-// 'Single quote strings don't exist' <= This causes an error
+"Строки в Scala объявляются в двойных кавычках"
+'a' // Символ в языке Scala 
+// 'Одиночные кавычки недопустимы в строках Scala' <= Это приведёт к ошибке
 
-// Strings have the usual Java methods defined on them
+// Строки имеют стандартные методы как в строки Java
 "hello world".length
 "hello world".substring(2, 6)
 "hello world".replace("C", "3")
 
-// They also have some extra Scala methods. See also: scala.collection.immutable.StringOps
+// Но также некоторые дополнительные, специфичные для Scala методы. См. также: scala.collection.immutable.StringOps
 "hello world".take(5)
 "hello world".drop(5)
 
-// String interpolation: notice the prefix "s"
+// Строковая интерполяция (string interpolation): notice the prefix "s"
 val n = 45
-s"We have $n apples" // => "We have 45 apples"
+s"У Валеры есть $n яблок" // => "У Валеры есть 45 яблок"
 
-// Expressions inside interpolated strings are also possible
+// Внутри интерполированных строк также можно  размещать выражения
 val a = Array(11, 9, 6)
-s"My second daughter is ${a(0) - a(2)} years old."    // => "My second daughter is 5 years old."
-s"We have double the amount of ${n / 2.0} in apples." // => "We have double the amount of 22.5 in apples."
-s"Power of 2: ${math.pow(2, 2)}"                      // => "Power of 2: 4"
+s"Моей средней дочери ${a(0) - a(2)} лет."               // => "Моей средней дочери 5 лет."
+s"А у Лизы всего ${n / 3.0} яблок."                      // => "А у Лизы всего 15 яблок."
+s"Квадрат двойки: ${math.pow(2, 2)}"                     // => "Квадрат двойки: 4"
 
-// Formatting with interpolated strings with the prefix "f"
-f"Power of 5: ${math.pow(5, 2)}%1.0f"         // "Power of 5: 25"
-f"Square root of 122: ${math.sqrt(122)}%1.4f" // "Square root of 122: 11.0454"
+// Можно форматировать интерполируемые строки, указывая префикс "f"
+f"Квадрат 5: ${math.pow(5, 2)}%1.0f"                     // "Квадрат 5: 25"
+f"Квадратный корень из 122: ${math.sqrt(122)}%1.4f"      // "Квадратный корень из 122: 11.0454"
 
-// Raw strings, ignoring special characters.
+// Необработанные строки, специальные символы игнорируются.
 raw"New line feed: \n. Carriage return: \r." // => "New line feed: \n. Carriage return: \r."
 
-// Some characters need to be "escaped", e.g. a double quote inside a string:
-"They stood outside the \"Rose and Crown\"" // => "They stood outside the "Rose and Crown""
+// Некоторые символы нужно "экранировать", например двойные кавычки внутри строки:
+"Они стояли около \"Розы и Короны\"" // => "Они стояли около "Розы и Короны""
 
-// Triple double-quotes let strings span multiple rows and contain quotes
+// Три символа двойных  кавычек позволяет определять многострочные строковые константы,
+// которые могут содержать символы двойных кавычек (которые не нуждаются в экранировании)
 val html = """<form id="daform">
                 <p>Press belo', Joe</p>
                 <input type="submit">
@@ -143,52 +144,50 @@ val html = """<form id="daform">
 
 
 /////////////////////////////////////////////////
-// 2. Functions
+// 2. Функции
 /////////////////////////////////////////////////
 
-// Functions are defined like so:
+// Функции определяются так:
 //
 //   def functionName(args...): ReturnType = { body... }
 //
-// If you come from more traditional languages, notice the omission of the
-// return keyword. In Scala, the last expression in the function block is the
-// return value.
+// Если вы пришли из традиционных языков, вероятно вам бросилось в глаза, что ключевое слово
+// return можно опустить. В Scala, последнее выражение в теле функции и есть возвращаемое значение. 
 def sumOfSquares(x: Int, y: Int): Int = {
   val x2 = x * x
   val y2 = y * y
   x2 + y2
 }
 
-// The { } can be omitted if the function body is a single expression:
+// Даже фигурные скобки { } можно опускать, если тело функции это одно выражение:
 def sumOfSquaresShort(x: Int, y: Int): Int = x * x + y * y
 
-// Syntax for calling functions is familiar:
+// Синтаксис вызова функции тривиален:
 sumOfSquares(3, 4)  // => 25
 
-// In most cases (with recursive functions the most notable exception), function
-// return type can be omitted, and the same type inference we saw with variables
-// will work with function return values:
-def sq(x: Int) = x * x  // Compiler can guess return type is Int
+// В большинстве случаев (рекурсивные функции - наиболее заметное исключение), возвращаемый функцией
+// тип данных можно не указывать, как мы это уже видели с переменными:
+def sq(x: Int) = x * x  // Компилятор сам выдедет, что возвращаемый тип - Int
 
-// Functions can have default parameters:
+// Функции также могут иметь значения по-умолчанию:
 def addWithDefault(x: Int, y: Int = 5) = x + y
 addWithDefault(1, 2) // => 3
 addWithDefault(1)    // => 6
 
 
-// Anonymous functions look like this:
+// Анонимные функции (anonymous functions) выглядят так:
 (x: Int) => x * x
 
-// Unlike defs, even the input type of anonymous functions can be omitted if the
-// context makes it clear. Notice the type "Int => Int" which means a function
-// that takes Int and returns Int.
+// В отличие от стандартных функций, даже входные параметры анонимных функций могут быть опущены,
+// если это понятно из контекста. Запись типа "Int => Int" означает что это анонимная функция получает
+// на вход аргумент типа Int и возвращает Int.
 val sq: Int => Int = x => x * x
 
-// Anonymous functions can be called as usual:
+// Анонимные функции можно вызвать как и обычные:
 sq(10)   // => 100
 
-// If each argument in your anonymous function is
-// used only once, Scala gives you an even shorter way to define them. These
+// Если каждый аргумент в вашей анонимной функции используется тлишь однажды,
+// Scala предоставляет вам более краткую запись. These
 // anonymous functions turn out to be extremely common, as will be obvious in
 // the data structure section.
 val addOne: Int => Int = _ + 1
@@ -214,7 +213,7 @@ def foo(x: Int): Int = {
 
 
 /////////////////////////////////////////////////
-// 3. Flow Control
+// 3. Управление выполнением
 /////////////////////////////////////////////////
 
 1 to 5
@@ -269,7 +268,7 @@ val text = if (x == 10) "yeah" else "nope"
 
 
 /////////////////////////////////////////////////
-// 4. Data Structures
+// 4. Структуры данных
 /////////////////////////////////////////////////
 
 val a = Array(1, 2, 3, 5, 8, 13)
@@ -320,7 +319,7 @@ d._2
 
 
 /////////////////////////////////////////////////
-// 5. Object Oriented Programming
+// 5. Объектно-ориентированное программирование
 /////////////////////////////////////////////////
 
 /*
@@ -405,7 +404,7 @@ val otherGeorge = george.copy(phoneNumber = "9876")
 
 
 /////////////////////////////////////////////////
-// 6. Pattern Matching
+// 6. Сопоставление с образцом (Pattern Matching)
 /////////////////////////////////////////////////
 
 // Pattern matching is a powerful and commonly used feature in Scala. Here's how
@@ -460,7 +459,7 @@ val patternFunc: Person => String = {
 
 
 /////////////////////////////////////////////////
-// 7. Functional Programming
+// 7. Функциональное программирование 
 /////////////////////////////////////////////////
 
 // Scala allows methods and functions to return, or take as parameters, other
@@ -522,7 +521,7 @@ for { n <- s; nSquared = n * n if nSquared < 10} yield nSquared
 
 
 /////////////////////////////////////////////////
-// 8. Implicits
+// 8. Неявные параметры и преобразования (Implicits)
 /////////////////////////////////////////////////
 
 /* WARNING WARNING: Implicits are a set of powerful features of Scala, and
@@ -582,7 +581,7 @@ def foo[T : C] = ...
 
 
 /////////////////////////////////////////////////
-// 9. Misc
+// 9. Остальное
 /////////////////////////////////////////////////
 
 // Importing things
